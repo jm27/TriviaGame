@@ -14,3 +14,12 @@
     font-size: 1.5rem;
     font-family: cursive;
 }
+.bg{
+    background-image: url('../images/movie.jpg');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+#row1{
+    position:relative; 
+
+}
