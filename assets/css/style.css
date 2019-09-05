@@ -23,3 +23,22 @@
     position:relative; 
 
 }
+#questions{
+    position:relative;
+    color: #faf014;
+}
+.answers{
+    color: #fcf899;
+}
+#timer{
+    font-size: 2rem;
+    text-align: center;
+    color: #f9fef7;
+    font-weight: bolder;
+}
+#stop{
+    font-size: 4.5rem;
+    text-align: center;
+    font-weight: bolder;
+    color: #f5d10d;
+}
