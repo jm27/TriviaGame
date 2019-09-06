@@ -132,7 +132,7 @@ window.onload = function () {
 
 //  Variable that will hold our setInterval that runs the stopwatch
 var intervalId;
-
+var counter = 0;
 // prevents the clock from being sped up unnecessarily
 var clockRunning = false;
 var time = 60;
@@ -182,7 +182,7 @@ function timeConverter(t) {
 
     var minutes = Math.floor(t / 60);
     var seconds = t - (minutes * 60);
-   // stop clock and switch to last screen statement
+    // stop clock and switch to last screen statement
     if (seconds === 0) {
         //Run stop Function
         stop();
@@ -202,6 +202,16 @@ function timeConverter(t) {
         // Give new variable attribute to link image
         imageFinish.attr("src", imgUrl);
         $("#stop").append(imageFinish);
+// Loop for counter go up 1 each time 
+        for (var i = 0; i < counter; i++) {
+           
+         if ( $("#" + i).check && correctAnswer == true) {
+            console.log("correct answer"+i);
+        }
+
+        }
+
+
     }
     if (seconds < 10) {
         seconds = "0" + seconds;
@@ -232,19 +242,37 @@ clickButton = $("#singlebutton").on("click", function () {
     // Remove start button
     $(".button").empty();
     // Questions loop and console
+
+
+
+
+
+
+
+
     for (i = 0; i < results.length; i++) {
         console.log(results[i]);
         $(".rowQ").attr('id', 'questions');
         //Store question inside variable
         var questions = results[i].question;
         console.log(questions);
-        //Store answers with radio input inside a variable and console
-        var answersOne = ($("<input type=\"radio\"> " + results[i].correct_answer + " </input>"));
-        var incorrectOne = ($("<input type=\"radio\"> " + results[i].incorrect_answers[0] + " </input>"));
-        var incorrectTwo = ($("<input type=\"radio\"> " + results[i].incorrect_answers[1] + " </input>"));
-        var incorrectThree = ($("<input type=\"radio\"> " + results[i].incorrect_answers[2] + " </input>"));
+        //Store answers with radio input inside a variable added name to each loop
+        var answersOne = ($("<input id=" + counter + " type=\"radio\" correctAnswer=true name=" + results[i].correct_answer + "> " + results[i].correct_answer + " </input>"));
+        counter++
+        var incorrectOne = ($("<input  id=" + counter + " type=\"radio\" name= " + results[i].correct_answer + "> " + results[i].incorrect_answers[0] + " </input>"));
+        counter++
+
+        var incorrectTwo = ($("<input  id=" + counter + " type=\"radio\" name= " + results[i].correct_answer + "> " + results[i].incorrect_answers[1] + " </input>"));
+        counter++
+
+        var incorrectThree = ($("<input id=" + counter + " type=\"radio\" name=" + results[i].correct_answer + ">" + results[i].incorrect_answers[2] + " </input>"));
+        counter++
+
         console.log(incorrectOne);
         console.log(answersOne);
+
+        
+        
         //Variable for new div
         var QuestionDiv = $("<div>");
         //Variable for h3 element to store questions
@@ -256,7 +284,10 @@ clickButton = $("#singlebutton").on("click", function () {
         //Append question to h3 element
         $(newQuestion).append(questions);
         //Append answers to h5 element
-        $(answers).append(answersOne, incorrectOne, incorrectTwo, incorrectThree);
+        var form = ($("<form>"));
+        $(form).append(answersOne, incorrectOne, incorrectTwo, incorrectThree);
+        $(answers).append(form);
+
         //Append h3 question h5 answers to new div
         $(QuestionDiv).append(newQuestion, answers);
         //Append div to row with questions id
@@ -264,7 +295,7 @@ clickButton = $("#singlebutton").on("click", function () {
         //$("#questions").append;
 
     }
-
+    // $("#questions").append(form);
     $("#questions").css('top', "-100px");
 
 
